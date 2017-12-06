@@ -6,45 +6,35 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
-  currentFocus: string = 'Angular Homework';
+  currentFocus: string = 'Recipe Box';
   currentTime = new Date();
   month: number = this.currentTime.getMonth() + 1;
   day: number = this.currentTime.getDate();
   year: number = this.currentTime.getFullYear();
-  tasks: Task[] = [
-    new Task('Finish weekend Angular homework for Epicodus course', 1),
-    new Task('Begin brainstorming possible JavaScript group projects', 3),
-    new Task('Add README file to last few Angular repos on GitHub',2)
+  recipes: Recipe[] = [
+    new Recipe('Pizza', ['Sauce','Dough','Cheese',]),
+    new Recipe('Nachos', ['Beef','Cream','Beans','Chips',])
+
   ];
-  selectedTask = null;
+  selectedRecipe = null;
+  showIngreds = null;
 
-  editTask(clickedTask) {
-    this.selectedTask = clickedTask;
+  toggleShowIngredients(clickedName)  {
+    clickedName.showIngreds = !clickedName.showIngreds;
   }
 
-  isDone(clickedTask: Task) {
-    if(clickedTask.done === true) {
-    } else {
 
-    }
+  editRecipe(clickedRecipe) {
+    this.selectedRecipe = clickedRecipe;
   }
 
-  finishEditiing() {
-    this.selectedTask = null;
-  }
-
-  priorityColor(currentTask){
-    if (currentTask.priority === 3){
-      return "bg-danger";
-    } else if (currentTask.priority === 2){
-      return "bg-warning";
-    } else {
-      return "bg-info";
-    }
+  finishEditing() {
+    this.selectedRecipe = null;
+    this.showIngreds = null;
   }
 }
 
-export class Task {
+export class Recipe {
   public done: boolean = false;
-  constructor(public description: string, public priority: number) { }
+  constructor(public name: string, public ingredients: string[] ) { }
 }
